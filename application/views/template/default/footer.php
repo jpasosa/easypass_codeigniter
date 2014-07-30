@@ -16,9 +16,9 @@
     <script src="<?php echo ASSETS;?>js/holder.js"></script>
     <script src="<?php echo ASSETS;?>js/application.js"></script>
     <script src="<?php echo PUBLIC_FOLDER;?>js/commons.js"></script>-->
-	<?php if(isset($scripts)):?>
-	<?php echo $scripts;?>
-	<?php endif;?>
+	<?php //if(isset($scripts)):?>
+	<?php //echo $scripts;?>
+	<?php //endif;?>
     <!-- Footer -->
 
     <div class="bs-footer" role="contentinfo" style="padding-top: 220px;">

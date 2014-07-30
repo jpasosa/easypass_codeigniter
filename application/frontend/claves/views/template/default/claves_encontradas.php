@@ -64,46 +64,32 @@
 </div>
 </div>
 
+
+
+<!-- <div class="clip_button">Copy To Clipboard</div>
+<div class="clip_button">Copy This Too!</div> -->
 <button id="copy-button" data-clipboard-text="Copy Me!" title="Click to copy me.">
 	Copy to Clipboard
 </button>
-<script src="<?php echo PUBLIC_FOLDER . 'assets/js/ZeroClipboard.Core.min.js';  ?>"></script>
-<script src="<?php echo PUBLIC_FOLDER . 'assets/js/main_clipboard.js'; ?>"></script>
 
+<script type="text/javascript">
+      var client = new ZeroClipboard( $('#copy-button') );
 
+      client.on( 'ready', function(event) {
+       console.log( 'movie is loaded' );
 
-<script>
-$(document).ready(function()
-{
-	$("")
-});
-</script>
+        client.on( 'copy', function(event) {
+          event.clipboardData.setData('text/plain', event.target.innerHTML);
+        } );
 
+        client.on( 'aftercopy', function(event) {
+          console.log('Copied text to clipboard: ' + event.data['text/plain']);
+        } );
+      } );
 
-<script>
-$(document).ready(function() {
-	//##### ELIMINAR categoría #########
-	$("body").on("click", ".delete", function(e)
-	{
-		e.returnValue   = false;
-		var id_tag 	= this.id;
-		if (confirm('Seguro de eliminarlo?')) {
-			jQuery.ajax({
-					type: "POST",
-					url: _base_url + '/tags/erase_ajax',
-					dataType: "text",
-					data: {
-					id_tag: id_tag
-				},
-				success:function(response, status, xhr){
-					$('tr#tr_'+id_tag).fadeOut("slow");
-				},
-				error:function (xhr, ajaxOptions, thrownError){
-					alert(thrownError);
-				}
-			});
-		}
-	});
-});
-</script>
+      client.on( 'error', function(event) {
+        console.log( 'ZeroClipboard error of type "' + event.name + '": ' + event.message );
+        ZeroClipboard.destroy();
+      } );
+    </script>
 
