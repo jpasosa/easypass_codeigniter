@@ -38,9 +38,16 @@
 								<td><?php echo $cl['id_clave']; ?></td>
 								<td><?php echo $cl['titulo']; ?></td>
 								<td><?php echo $cl['url']; ?></td>
-								<td><?php echo $cl['usuario']; ?></td>
 								<td>
-									<input type="password" value="<?php echo $this->encrypt->decode($cl['clave']); ?>" />
+									<button class="copy-button" title="<?php echo $cl['usuario']; ?>" data-clipboard-text="<?php echo $this->encrypt->decode($cl['clave']); ?>" title="Click to copy me.">
+										<?php echo $cl['usuario']; ?>
+									</button>
+								</td>
+								<td>
+									<!-- <button class="copy-button" data-clipboard-text="<?php echo $this->encrypt->decode($cl['clave']); ?>" title="Click to copy me."> -->
+									<button class="copy-button" title="<?php echo $this->encrypt->decode($cl['clave']); ?>" data-clipboard-text="<?php echo $this->encrypt->decode($cl['clave']); ?>" title="Click to copy me.">
+										<?php echo $this->encrypt->decode($cl['clave']); ?>
+									</button>
 								</td>
 								<td>
 									<a  class="btn btn-default" href="<?php echo base_url('claves/editar') . '/' . $cl['id_clave'] . $this->config->item('url_suffix');?>">
@@ -66,15 +73,14 @@
 
 
 
-<!-- <div class="clip_button">Copy To Clipboard</div>
-<div class="clip_button">Copy This Too!</div> -->
-<button id="copy-button" data-clipboard-text="Copy Me!" title="Click to copy me.">
-	Copy to Clipboard
-</button>
+
 
 <script type="text/javascript">
-      var client = new ZeroClipboard( $('#copy-button') );
-
+	$('.copy-button').click(function() {
+		var clave = $(this).data("clipboard-text");
+		console.log("la clave es " , clave);
+	});
+      var client = new ZeroClipboard( $('.copy-button') );
       client.on( 'ready', function(event) {
        console.log( 'movie is loaded' );
 
@@ -84,6 +90,7 @@
 
         client.on( 'aftercopy', function(event) {
           console.log('Copied text to clipboard: ' + event.data['text/plain']);
+
         } );
       } );
 
