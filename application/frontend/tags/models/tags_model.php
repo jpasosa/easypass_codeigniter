@@ -20,9 +20,17 @@ class Tags_model extends CI_Model
 
 		$errores = array();
 
+
+
 		if($tag['nombre_tag'] == '')
 		{
 			$errores['nombre_tag'] = 'Debe ingresar el nombre';
+		}
+		else {
+			if($this->_existNameTag($tag['nombre_tag']))
+			{
+				$errores['existe_nombre'] = 'El tag ingresado ya existe.';
+			}
 		}
 
 		return $errores;
@@ -112,6 +120,24 @@ class Tags_model extends CI_Model
 			$tag = $q->row_array();
 
 			return $tag;
+
+		} catch (Exception $e) {
+			echo $e->getMessage();
+			exit(1);
+		}
+	}
+
+	private function _existNameTag( $nombre_tag )
+	{
+		try {
+
+			$tag = $this->db->get_where('tags', array('nombre_tag'=>$nombre_tag));
+			$tag = $tag->row_array();
+			if ( isset($tag['id_tag']) ) {
+				return true;
+			} else {
+				return false;
+			}
 
 		} catch (Exception $e) {
 			echo $e->getMessage();
