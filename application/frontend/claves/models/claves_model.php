@@ -576,6 +576,31 @@ class Claves_model extends CI_Model
 		}
 	}
 
+	/**
+	 * Controla si existe algun id_categoria en las claves.
+	 * Se usa más que nada, por que al eliminar una categoría, debemos
+	 * controlar que no esté ingresada en los accesos.
+	 **/
+	public function existsInClaves( $id_categoria )
+	{
+		try {
+
+			$existe = $this->db->get_where('claves', array('id_categoria'=>$id_categoria));
+			$clave = $existe->result_array();
+
+			if ( isset($clave[0])) {
+				return true;
+			} else {
+				return false;
+			}
+
+
+		} catch (Exception $e) {
+			echo $e->getMessage();
+			exit(1);
+		}
+	}
+
 
 	// public function update($categoria, $id_categoria)
 	// {

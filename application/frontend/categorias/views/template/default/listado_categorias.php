@@ -97,16 +97,16 @@ $(document).ready(function() {
 		if (confirm('Seguro de eliminarlo?')) {
 			jQuery.ajax({
 					type: "POST",
-					url: _base_url + '/categorias/erase_ajax',
-					dataType: "text",
+					url: _base_url + 'categorias/erase_ajax',
+					dataType: "json",
 					data: {
 					id_categoria: id_categoria
 				},
-				success:function(response, status, xhr){
+				success:function(data){
 					$('tr#tr_'+id_categoria).fadeOut("slow");
 				},
-				error:function (xhr, ajaxOptions, thrownError){
-					alert(thrownError);
+				error:function (e){
+					alert('Hubo un error al eliminar la categoría. Se puede deber a que haya algun acceso con esa categoría.');
 				}
 			});
 		}

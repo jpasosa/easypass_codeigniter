@@ -168,11 +168,18 @@ class Categorias extends MY_Controller {
 	{
 		$id_categoria = $this->input->post('id_categoria');
 
+		$this->load->model('claves/claves_model');
+		$exist_in_claves = $this->claves_model->existsInClaves($id_categoria);
 
-		$erase_categoria = $this->categorias_model->eraseCategoria($id_categoria);
+		if (!$exist_in_claves) {
+			$erase_categoria = $this->categorias_model->eraseCategoria($id_categoria);
+		} else {
+			$erase_categoria = false;
+		}
 
 		if ($erase_categoria) {
-			return true;
+			$data['success'] = 'success';
+			echo json_encode($data, true);
 		} else {
 			return false;
 		}
