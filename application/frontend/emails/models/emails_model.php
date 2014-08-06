@@ -142,7 +142,7 @@ class emails_model extends CI_Model
 	private function _existeEnAlgunIngreso($id_email)
 	{
 		try {
-			$sql 	= "SELECT * FROM claves C WHERE C.id_email=$id_email OR C.id_email_alt=$id_email";
+			$sql 	= "SELECT * FROM claves C WHERE C.id_email=$id_email";
 			$q 		= $this->db->query($sql);
 			$emails = $q->result_array();
 

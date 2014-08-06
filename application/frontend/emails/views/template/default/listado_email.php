@@ -69,7 +69,7 @@ $(document).ready(function() {
 		{
 			jQuery.ajax({
 					type: "POST",
-					url: _base_url + '/emails/erase_ajax',
+					url: _base_url + 'emails/erase_ajax',
 					dataType: "json",
 					data: {
 					id_email: id_email
