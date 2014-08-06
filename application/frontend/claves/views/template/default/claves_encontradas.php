@@ -50,13 +50,8 @@
 									</button>
 								</td>
 								<td>
-									<a  class="btn btn-default" href="<?php echo base_url('claves/editar') . '/' . $cl['id_clave'] . $this->config->item('url_suffix');?>">
-										<span class="glyphicon glyphicon-edit"></span>
-									</a>
-									<a>
-										<button class="delete btn "  type="button"  id="<?php echo $cl['id_clave'];?>" data-id="<?php echo $cl['id_clave'];?>">
-											<span class="glyphicon glyphicon-remove-circle"></span>
-										</button>
+									<a  class="btn btn-default" href="<?php echo base_url('claves/ver') . '/' . $cl['id_clave'] . $this->config->item('url_suffix');?>">
+										<span class="glyphicon glyphicon-search"></span>
 									</a>
 								</td>
 							</tr>
@@ -98,5 +93,5 @@
         console.log( 'ZeroClipboard error of type "' + event.name + '": ' + event.message );
         ZeroClipboard.destroy();
       } );
-    </script>
+</script>
 

@@ -13,6 +13,7 @@ class Claves extends MY_Controller {
 		$this->load->model('tags/tags_model');
 		$this->load->model('claves/claves_model');
 		$this->load->model('emails/emails_model');
+
 		//Carga de clases de Equipos
 		//$this->load->library('categoria');
 	}
@@ -80,6 +81,26 @@ class Claves extends MY_Controller {
 	}
 
 
+	public function ver( $id_clave = 0 )
+	{
+
+		if(!$this->user->is_logged()) 	redirect('login');
+
+		if( $id_clave == 0 ) { redirect('claves/buscar'); }
+
+
+		$data['clave'] 		= $this->claves_model->getClave($id_clave);;
+		$data['categorias']		= $this->categorias_model->getCategorias();
+		$data['emails']			= $this->emails_model->getEmails();
+		$data['tags']			= $this->tags_model->getTags();
+		$data['script_header'] 	= array('assets/js/ZeroClipboard.js');
+		$data['view_file'] 		= 'ver_acceso';
+
+		$this->load->view('template',$data);
+
+
+
+	}
 
 
 
