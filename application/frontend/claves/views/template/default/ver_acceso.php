@@ -1,5 +1,3 @@
-
-
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
 <div class="bs-docs-container">
@@ -35,15 +33,14 @@
 						<div>
 							<label for="nombre">Tags</label>
 							<br />
-							<select data-placeholder="Seleccione los tags. . ." name="tags[]" style="width:350px;" multiple="multiple" class="chosen-select">
-								<option value=""></option>
+							<select data-placeholder="Seleccione los tags. . ." name="tags[]" style="width:350px;" multiple="multiple" class="chosen-select" disabled="disabled">
+								<!-- <option value=""></option> -->
 								<?php foreach ($tags AS $ad): ?>
 									<option value="<?php echo $ad['id_tag'] ?>"
-										<?php if (in_array($ad['id_tag'], $clave['tags'])): echo 'selected="selected"';endif; ?> >
+										<?php if (in_array($ad['id_tag'], $tags_claves)): echo 'selected="selected"';endif; ?> >
 										<?php echo $ad['nombre_tag']; ?>
 									</option>
 								<?php endforeach; ?>
-
 							</select>
 						</div>
 						<br />

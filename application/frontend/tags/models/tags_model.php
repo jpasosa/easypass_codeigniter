@@ -79,6 +79,45 @@ class Tags_model extends CI_Model
 
 	}
 
+
+	/**
+	 * Nos trae todos los id_tags pertenecientes a la clave, todos juntos en un array.
+	 * ejemplo de salida. .  array(21,23,26)  -> donde 21 23 y 26 son los id_tags que pertenecen a esa clave
+	 *
+	 * @team 	Allytech
+	 * @author 	Juan Pablo Sosa <juans@allytech.com>
+	 * @date 	default
+	 *
+	 * @param       String
+	 * @return      String
+	 **/
+	public function getIdTagsByClave( $id_clave )
+	{
+		try {
+
+			$sql = "SELECT * FROM tags_claves TC
+					INNER JOIN tags T
+						ON TC.id_tag=T.id_tag
+					WHERE id_clave=$id_clave
+					";
+			$tags 			= $this->db->query($sql);
+			$tags_claves 	= $tags->result_array();
+
+			$arr_tags 		= array();
+			foreach ($tags_claves AS $tc)
+			{
+				$arr_tags[] = $tc['id_tag'];
+			}
+
+			return $arr_tags;
+
+
+		} catch (Exception $e) {
+			echo $e->getMessage();
+			exit(1);
+		}
+	}
+
 	public function update($tag, $id_tag)
 	{
 		try {

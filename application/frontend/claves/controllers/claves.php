@@ -93,6 +93,7 @@ class Claves extends MY_Controller {
 		$data['categorias']		= $this->categorias_model->getCategorias();
 		$data['emails']			= $this->emails_model->getEmails();
 		$data['tags']			= $this->tags_model->getTags();
+		$data['tags_claves']	= $this->tags_model->getIdTagsByClave($id_clave);
 		$data['script_header'] 	= array('assets/js/ZeroClipboard.js');
 		$data['view_file'] 		= 'ver_acceso';
 
