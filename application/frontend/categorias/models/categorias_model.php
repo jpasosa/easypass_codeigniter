@@ -35,10 +35,18 @@ class Categorias_model extends CI_Model
 	{
 		try {
 
+
 			$this->db->insert('categorias', $categoria);
 			if ($this->db->affected_rows()) {
 				$id_insert = $this->db->insert_id();
-				$this->db->insert('tags', array('nombre_tag'=>$categoria['nombre']));
+
+				// Saneamiento de la categoría
+				$this->load->helper('string');
+				$nombre_categoria= $categoria['nombre'];
+				$nombre_tag 		= sanear_string($nombre_categoria);
+				$nombre_tag 		= strtolower(str_replace(" ", "-",	utf8_decode($nombre_tag)));
+				// inserto el TAG
+				$this->db->insert('tags', array('nombre_tag'=>$nombre_tag));
 				return $id_insert;
 			} else {
 				return 0;
