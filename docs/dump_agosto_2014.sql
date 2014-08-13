@@ -23266,6 +23266,19 @@ INSERT INTO `usuarios` (`id_usuario`, `email`, `id_rol`, `nombre`, `apellido`, `
 (1, 'juanpablososa@gmail.com', 1, 'admin', 'admin', '*6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9', 'telefono', 1, 1, '121212', '9877474747', 'Razon Social SA', 0, 1);
 
 --
+-- Volcado de datos para la tabla `tags`
+--
+
+INSERT INTO `tags` (`id_tag`, `nombre_tag`) VALUES
+(1, 'sin-categoria');
+
+--
+-- Volcado de datos para la tabla `categorias`
+--
+
+INSERT INTO `categorias` (`id_categoria`, `nombre`) VALUES
+(1, 'Sin Categoría');
+--
 -- Restricciones para tablas volcadas
 --
 
