@@ -89,7 +89,7 @@ class Claves extends MY_Controller {
 		if( $id_clave == 0 ) { redirect('claves/buscar'); }
 
 
-		$data['clave'] 		= $this->claves_model->getClave($id_clave);;
+		$data['clave'] 			= $this->claves_model->getClave($id_clave);;
 		$data['categorias']		= $this->categorias_model->getCategorias();
 		$data['emails']			= $this->emails_model->getEmails();
 		$data['tags']			= $this->tags_model->getTags();

@@ -13,7 +13,7 @@
 			<div class="form-group">
 				<label for="dni">Categoria</label>
 				<select name="id_categoria" class="form-control custom-input-lg">
-	    				<option value="0" >En todas.</option>
+	    				<option value="0" >Es indistinto.</option>
 	    				<?php foreach ($categorias AS $cat): ?>
 	    						<option value="<?php echo $cat['id_categoria']; ?>" >
 	    							<?php echo $cat['nombre'];?>

@@ -22,7 +22,7 @@
 			<div class="form-group">
 				<label for="dni">Categoria</label>
 				<select name="id_categoria" class="form-control custom-input-lg">
-	    				<option value="0" <?php if ($clave['id_categoria'] == 0) 	echo 'selected="selected"'; ?>>En todas.</option>
+	    				<!-- <option value="0" <?php if ($clave['id_categoria'] == 0) 	echo 'selected="selected"'; ?>>En todas.</option> -->
 	    				<?php foreach ($categorias AS $cat): ?>
 	    					<?php if ($cat['id_categoria'] == $clave['id_categoria']): ?>
 	    						<option value="<?php echo $cat['id_categoria']; ?>" selected="selected">
