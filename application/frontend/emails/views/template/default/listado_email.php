@@ -33,7 +33,9 @@
 						<?php foreach($emails as $email):?>
 							<tr id="tr_<?php echo $email['id_email']; ?>">
 								<td><?php echo $email['id_email']; ?></td>
-								<td><?php echo $email['nombre_email']; ?></td>
+								<td title="<?php echo $email['descripcion_email']; ?>">
+									<?php echo $email['nombre_email']; ?>
+								</td>
 								<td>
 									<a  class="btn btn-default" href="<?php echo base_url('emails/editar') . '/' . $email['id_email'] . $this->config->item('url_suffix');?>">
 										<span class="glyphicon glyphicon-edit"></span>

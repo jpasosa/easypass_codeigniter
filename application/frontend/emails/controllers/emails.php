@@ -106,7 +106,7 @@ class Emails extends MY_Controller {
 		if($this->input->server('REQUEST_METHOD') == 'POST')
 		{
 			$email 			= $this->_getDataPost();
-			$validate_email = $this->emails_model->validateEmail($email);
+			$validate_email = $this->emails_model->validateEmail($email, $id_email);
 
 			if ( empty($validate_email) )
 			{ 	// Validado OKA
@@ -170,7 +170,8 @@ class Emails extends MY_Controller {
 	{
 		$email = array();
 
-		$email['nombre_email']	= $this->input->post('nombre_email') ? $this->input->post('nombre_email') : '';
+		$email['nombre_email']		= $this->input->post('nombre_email') ? $this->input->post('nombre_email') : '';
+		$email['descripcion_email']	= $this->input->post('descripcion_email') ? $this->input->post('descripcion_email') : '';
 
 		return $email;
 

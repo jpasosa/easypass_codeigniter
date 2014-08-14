@@ -15,34 +15,49 @@ class emails_model extends CI_Model
 	/**
 	 * Validación de la categoría
 	 **/
-	public function validateEmail($email)
+	public function validateEmail($email, $id_email_editing)
 	{
+		try {
 
-		$errores = array();
+			$errores = array();
 
-		if($email['nombre_email'] == '') {
-			$errores['nombre_email'] = 'Debe ingresar el nombre del email.';
-		}
-		else
-		{
-			if( $this->yaExiste($email['nombre_email']) )
-			{
-				$errores['existe_email'] = 'El mail ingresado ya existe en la base de datos.';
+			if($email['nombre_email'] == '') {
+				$errores['nombre_email'] = 'Debe ingresar el nombre del email.';
 			}
+			else
+			{
+				if( $this->yaExiste($email['nombre_email'], $id_email_editing) )
+				{
+					$errores['existe_email'] = 'El mail ingresado ya existe en la base de datos.';
+				}
+			}
+
+
+
+			return $errores;
+
+
+		} catch (Exception $e) {
+			echo $e->getMessage();
+			exit(1);
 		}
 
 
-
-		return $errores;
 	}
 
-	public function yaExiste($nombre_email)
+
+
+	/**
+	 * Comprueba si ya existe el nombre del email, y a la vez que no sea el mismo id qe está editando.
+	 * Por que puede pasar que haya editado para solamente modificar la descripción, y eso sería correcto.
+	 **/
+	public function yaExiste($nombre_email, $id_email_editing)
 	{
 		try {
 
 			$q_email 	= $this->db->get_where('emails', array('nombre_email'=>$nombre_email));
 			$emails 	= $q_email->result_array();
-			if (isset($emails[0])) {
+			if (isset($emails[0]) && $id_email_editing != $emails[0]['id_email']) {
 				return true;
 			} else {
 				return false;

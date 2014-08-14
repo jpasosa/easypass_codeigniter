@@ -16,6 +16,11 @@
 				<label for="nombre">Nombre</label>
 				<input type="email" class="form-control custom-input-lg" name="nombre_email" id="nombre_email" placeholder="Ingrese el nombre del mail" value="<?php echo $email['nombre_email']?>">
 			</div>
+			<div class="form-group">
+				<label for="nombre">Descripcion</label>
+				<textarea class="form-control custom-input-lg" name="descripcion_email" placeholder="Ingrese el descripcion"><?php echo $email['descripcion_email']?></textarea>
+			</div>
+
 
 			<?php if(isset($email['id_email'])):?>
 				<input type="hidden"  name="id_email" value="<?php echo $email['id_email']?>">
