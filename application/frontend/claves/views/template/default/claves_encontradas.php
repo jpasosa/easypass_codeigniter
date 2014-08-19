@@ -93,5 +93,8 @@
         console.log( 'ZeroClipboard error of type "' + event.name + '": ' + event.message );
         ZeroClipboard.destroy();
       } );
+
+
+
 </script>
 

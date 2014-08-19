@@ -94,14 +94,15 @@
 				<textarea class="form-control custom-input-lg" name="descripcion" id="descripcion" readonly="readonly"><?php echo $clave['descripcion']?></textarea>
 			</div>
 			<a href="#">
-				<button type="submit" class="btn btn-default">Editar Acceso</button>
+				<button type="button" class="btn btn-default">Editar Acceso</button>
 			</a>
 			<a href="#">
-				<button type="submit" class="btn btn-default">Eliminar Acceso</button>
+				<button type="button" id="<?php echo $clave['id_clave']; ?>" class="btn btn-default eliminar_acceso">Eliminar Acceso</button>
 			</a>
 		</div>
 	</form>
 
+</div>
 
 
 
@@ -120,17 +121,7 @@
 <script src="<?php echo PUBLIC_FOLDER;?>assets/chosen/chosen.jquery.js" type="text/javascript"></script>
 <script src="<?php echo PUBLIC_FOLDER;?>assets/chosen/docsupport/prism.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
-	// var config = {
-	// 	'.chosen-select'           : {},
-	// 	'.chosen-select-deselect'  : {allow_single_deselect:true},
-	// 	'.chosen-select-no-single' : {disable_search_threshold:10},
-	// 	'.chosen-select-no-results': {no_results_text:'No pudimos encontrar nada!'},
-	// 	'.chosen-select-search': {search_contains: true},
-	// 	'.chosen-select-width'     : {width:"95%"}
-	// }
-	// for (var selector in config) {
-	// 	$(selector).chosen(config[selector]);
-	// }
+
 	$(".chosen-select").chosen(
 	{
 		allow_single_deselect:true,
@@ -139,9 +130,7 @@
 		search_contains: true,
 		width: "55%"
 	});
-</script>
 
-<script type="text/javascript">
 	$('.copy-button').click(function() {
 		var clave = $(this).data("clipboard-text");
 		console.log("la clave es " , clave);
@@ -164,7 +153,35 @@
         console.log( 'ZeroClipboard error of type "' + event.name + '": ' + event.message );
         ZeroClipboard.destroy();
       } );
+
+
+      //##### ELIMINAR acceso #########
+	$("body").on("click", ".eliminar_acceso", function(e)
+	{
+		e.preventDefault();
+		var id_clave 	= this.id;
+		if (confirm('Seguro de eliminarlo?'))
+		{
+			jQuery.ajax(
+			{
+				type: "POST",
+				url: _base_url + 'claves/erase_ajax',
+				dataType: "text",
+				data: {
+					id_clave: id_clave
+				},
+				success:function(response, status, xhr)
+				{
+					alert("Accesos eliminado.");
+					// location.reload("pepepep");
+					window.location.href = _base_url + "login.html";
+				},
+				error:function (xhr, ajaxOptions, thrownError){
+					alert(thrownError);
+				}
+			});
+		}
+	});
 </script>
 
 
-</div>

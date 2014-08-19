@@ -107,9 +107,9 @@ class Claves_model extends CI_Model
 			$id_categoria 	= $searching['id_categoria'];
 
 			if ($id_categoria == 0) {
-				$search_categoria = " ";
+				$search_categoria = " AND C.activo=1 ";
 			} else {
-				$search_categoria = " AND C.id_categoria=" . $id_categoria;
+				$search_categoria = " AND C.id_categoria=" . $id_categoria . " AND C.activo=1 ";
 			}
 
 			$words_arr 		= explode(" ", $words);
@@ -239,43 +239,17 @@ class Claves_model extends CI_Model
 
 			if ($id_categoria == 0) {
 				$todas_categorias = true;
-				$search_categoria = " ";
+				$search_categoria = "  ";
 			} else {
 				$todas_categorias = false;
-				$search_categoria = " (C.id_categoria=" . $id_categoria . ') AND ';
+				$search_categoria = " (C.id_categoria=" . $id_categoria . ') ';
 			}
 
 			$words = explode(" ", $words);
 
-			// $like_claves = "";
-			// foreach($words AS $k=>$word)
-			// {
-			// 	if ( $k == 0) {
-			// 		$like_claves .= ' C.titulo LIKE "%' . $word . '%" OR C.url LIKE "%' . $word . '%"  OR C.usuario LIKE "%' . $word . '%" OR C.descripcion LIKE "%' . $word . '%" ';
-			// 	} else {
-			// 		$like_claves .= ' OR C.titulo LIKE "%' . $word . '%" OR C.url LIKE "%' . $word . '%" OR C.usuario LIKE "%' . $word . '%" OR C.descripcion LIKE "%' . $word . '%" ';
-
-			// }
-
-
-			// $sql = "
-			// 		SELECT * FROM claves C WHERE $search_categoria ($like_claves)
-			// 		";
-			// $res = $this->db->query($sql);
-			// $claves = $res->result_array();
-			// este resultado son sobre la tabla claves. Falta relcionar con tags.
-
-
-
 			$likes = "";
 			foreach($words AS $k=>$word)
 			{
-				// Acá buscaba también por el email; pero no es importante. Traia problemas por que en muchos accesos no ingresamos mail.
-				// if ( $k == 0) {
-				// 	$likes .= ' T.nombre_tag LIKE "%' . $word . '%" OR C.titulo LIKE "%' . $word . '%" OR C.url LIKE "%' . $word . '%" OR C.usuario LIKE "%' . $word . '%" OR C.descripcion LIKE "%' . $word . '%" OR E.nombre_email LIKE "%' . $word . '%" ';
-				// } else {
-				// 	$likes .= ' OR T.nombre_tag LIKE "%' . $word . '%" OR C.titulo LIKE "%' . $word . '%" OR C.url LIKE "%' . $word . '%" OR C.usuario LIKE "%' . $word . '%" OR C.descripcion LIKE "%' . $word . '%" OR E.nombre_email LIKE "%' . $word . '%" ';
-				// }
 				if ( $k == 0) {
 					$likes .= ' T.nombre_tag LIKE "%' . $word . '%" OR C.titulo LIKE "%' . $word . '%" OR C.url LIKE "%' . $word . '%" OR C.usuario LIKE "%' . $word . '%" OR C.descripcion LIKE "%' . $word . '%" ';
 				} else {
@@ -296,7 +270,15 @@ class Claves_model extends CI_Model
 			$res 	= $this->db->query($sql);
 			$claves = $res->result_array();
 
-			if ( count($claves) > 0) {
+			if ( count($claves) > 0)
+			{
+				foreach ($claves AS $k => $cl) // Saco los que no están activos, que son los que fueron eliminados.
+				{
+					if($cl['activo'] == 0) {
+						unset($claves[$k]);
+					}
+				}
+
 				return $claves;
 			} else {
 				return array();
@@ -346,6 +328,22 @@ class Claves_model extends CI_Model
 				return false;
 			}
 
+
+		} catch (Exception $e) {
+			echo $e->getMessage();
+			exit(1);
+		}
+	}
+
+
+	public function eraseClave( $id_clave )
+	{
+		try {
+
+			$this->db->where('id_clave', $id_clave);
+			$this->db->update('claves', array('activo'=>0));
+
+			 return true;
 
 		} catch (Exception $e) {
 			echo $e->getMessage();

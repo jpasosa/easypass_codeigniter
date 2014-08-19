@@ -246,12 +246,11 @@ class Claves extends MY_Controller {
 	 **/
 	public function erase_ajax()
 	{
-		$id_categoria = $this->input->post('id_categoria');
+		$id_clave = $this->input->post('id_clave');
 
+		$erase_clave = $this->claves_model->eraseClave($id_clave);
 
-		$erase_categoria = $this->categorias_model->eraseCategoria($id_categoria);
-
-		if ($erase_categoria) {
+		if ($erase_clave) {
 			return true;
 		} else {
 			return false;
