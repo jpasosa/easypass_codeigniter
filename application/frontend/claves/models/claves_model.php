@@ -232,6 +232,7 @@ class Claves_model extends CI_Model
 
 		try {
 			if( $searching == NULL) 	show_404();
+			$this->load->helper('string');
 
 			$words 		= $searching['words'];
 			$id_categoria 	= $searching['id_categoria'];
@@ -270,12 +271,16 @@ class Claves_model extends CI_Model
 			$res 	= $this->db->query($sql);
 			$claves = $res->result_array();
 
+
 			if ( count($claves) > 0)
 			{
-				foreach ($claves AS $k => $cl) // Saco los que no están activos, que son los que fueron eliminados.
+				// Saco los que no están activos, que son los que fueron eliminados.
+				foreach ($claves AS $k => $cl)
 				{
 					if($cl['activo'] == 0) {
 						unset($claves[$k]);
+					} else {
+						$claves[$k]['url_short'] = cortar_palabra($cl['url'], 30);
 					}
 				}
 

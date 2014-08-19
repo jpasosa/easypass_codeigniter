@@ -54,7 +54,6 @@
 										<?php echo $ad['nombre_tag']; ?>
 									</option>
 								<?php endforeach; ?>
-
 							</select>
 						</div>
 						<br />

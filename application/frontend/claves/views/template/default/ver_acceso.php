@@ -91,9 +91,9 @@
 			</div>
 			<div class="form-group">
 				<label for="nombre">Descripcion</label>
-				<textarea class="form-control custom-input-lg" name="descripcion" id="descripcion" readonly="readonly"><?php echo $clave['descripcion']?></textarea>
+				<textarea class="form-control custom-input-lg" name="descripcion" id="descripcion" readonly="readonly"><?php echo $clave['descripcion'] ?></textarea>
 			</div>
-			<a href="#">
+			<a href="<?php echo base_url(PUBLIC_FOLDER . 'claves/editar/' . $clave['id_clave'] . '.html'); ?>">
 				<button type="button" class="btn btn-default">Editar Acceso</button>
 			</a>
 			<a href="#">

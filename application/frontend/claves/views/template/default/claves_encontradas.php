@@ -37,7 +37,7 @@
 							<tr id="tr_<?php echo $cl['id_clave']; ?>">
 								<td><?php echo $cl['id_clave']; ?></td>
 								<td><?php echo $cl['titulo']; ?></td>
-								<td><?php echo $cl['url']; ?></td>
+								<td title="<?php echo $cl['url']; ?>"><?php echo $cl['url_short']; ?></td>
 								<td>
 									<button class="copy-button" title="<?php echo $cl['usuario']; ?>" data-clipboard-text="<?php echo $this->encrypt->decode($cl['clave']); ?>" title="Click to copy me.">
 										<?php echo $cl['usuario']; ?>

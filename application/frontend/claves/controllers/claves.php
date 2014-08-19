@@ -181,6 +181,9 @@ class Claves extends MY_Controller {
 		}
 
 		$data['claves_encontradas'] = $busqueda;
+
+
+
 		$data['form_action'] 	= base_url('claves/buscar');
 		$categorias 			= $this->categorias_model->getCategorias();
 		$data['script_header'] 	= array('assets/js/ZeroClipboard.js');
