@@ -122,6 +122,9 @@
 <script src="<?php echo PUBLIC_FOLDER;?>assets/chosen/chosen.jquery.js" type="text/javascript"></script>
 <script src="<?php echo PUBLIC_FOLDER;?>assets/chosen/docsupport/prism.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
+	$( document ).ready(function() {
+	      $( "#titulo" ).focus();
+	});
 	// var config = {
 	// 	'.chosen-select'           : {},
 	// 	'.chosen-select-deselect'  : {allow_single_deselect:true},
@@ -137,7 +140,7 @@
 	{
 		allow_single_deselect:true,
 		disable_search_threshold: 10,
-		no_results_text: "No pudimos encontrar nada!",
+		no_results_text: "No pudimos encontrar ",
 		search_contains: true,
 		width: "55%"
 	});

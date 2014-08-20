@@ -24,47 +24,25 @@
 			<button type="submit" class="btn btn-default">Guardar datos</button>
 		</div>
 	</form>
-
-
+</div>
 
 
 
 <script type="text/javascript">
-	$(function(){
-		$('.delete').bind('click',function(e){
-			var id = $(this).data('id');
-			console.log(id);
+	$( document ).ready(function()
+	{
+	      $( "#nombre_tag" ).focus();
+
+
+		$("#nombre_tag").keydown(function (e)
+		{
+		     if (e.keyCode == 32)
+		     {
+		       $(this).val($(this).val() + "-"); // append '-' to input
+		       return false; // return false to prevent space from being added
+		     }
 		});
 	});
-
-	$("#nombre_tag").keydown(function (e)
-	{
-	     if (e.keyCode == 32)
-	     {
-	       $(this).val($(this).val() + "-"); // append '-' to input
-	       return false; // return false to prevent space from being added
-	     }
-	});
-
-
 </script>
 
 
-
-<script src="<?php echo PUBLIC_FOLDER;?>assets/chosen/chosen.jquery.js" type="text/javascript"></script>
-<script src="<?php echo PUBLIC_FOLDER;?>assets/chosen/docsupport/prism.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript">
-	var config = {
-		'.chosen-select'           : {},
-		'.chosen-select-deselect'  : {allow_single_deselect:true},
-		'.chosen-select-no-single' : {disable_search_threshold:10},
-		'.chosen-select-no-results': {no_results_text:'No pudimos encontrar nada!'},
-		'.chosen-select-search-contains': {search_contains: true},
-		'.chosen-select-width'     : {width:"95%"}
-	}
-	for (var selector in config) {
-		$(selector).chosen(config[selector]);
-	}
-</script>
-
-</div>

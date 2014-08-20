@@ -29,35 +29,13 @@
 			<button type="submit" class="btn btn-default">Guardar datos</button>
 		</div>
 	</form>
-
-
+</div>
 
 
 
 <script type="text/javascript">
-	$(function(){
-		$('.delete').bind('click',function(e){
-			var id = $(this).data('id');
-			console.log(id);
-		});
+	$( document ).ready(function() {
+	      $( "#nombre_email" ).focus();
 	});
 </script>
 
-
-
-<script src="<?php echo PUBLIC_FOLDER;?>assets/chosen/chosen.jquery.js" type="text/javascript"></script>
-<script src="<?php echo PUBLIC_FOLDER;?>assets/chosen/docsupport/prism.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript">
-	var config = {
-		'.chosen-select'           : {},
-		'.chosen-select-deselect'  : {allow_single_deselect:true},
-		'.chosen-select-no-single' : {disable_search_threshold:10},
-		'.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
-		'.chosen-select-width'     : {width:"95%"}
-	}
-	for (var selector in config) {
-		$(selector).chosen(config[selector]);
-	}
-</script>
-
-</div>
