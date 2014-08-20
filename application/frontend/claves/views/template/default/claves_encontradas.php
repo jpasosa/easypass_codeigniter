@@ -39,15 +39,11 @@
 								<td><?php echo $cl['titulo']; ?></td>
 								<td title="<?php echo $cl['url']; ?>"><?php echo $cl['url_short']; ?></td>
 								<td>
-									<button class="copy-button" title="<?php echo $cl['usuario']; ?>" data-clipboard-text="<?php echo $this->encrypt->decode($cl['clave']); ?>" title="Click to copy me.">
-										<?php echo $cl['usuario']; ?>
-									</button>
+									<button class="copy-button" title="<?php echo $cl['usuario']; ?>" data-clipboard-text="<?php echo $this->encrypt->decode($cl['clave']); ?>" title="Click to copy me."><?php echo $cl['usuario']; ?></button>
 								</td>
 								<td>
 									<!-- <button class="copy-button" data-clipboard-text="<?php echo $this->encrypt->decode($cl['clave']); ?>" title="Click to copy me."> -->
-									<button class="copy-button" title="<?php echo $this->encrypt->decode($cl['clave']); ?>" data-clipboard-text="<?php echo $this->encrypt->decode($cl['clave']); ?>" title="Click to copy me.">
-										<?php echo $this->encrypt->decode($cl['clave']); ?>
-									</button>
+									<button class="copy-button" title="<?php echo $this->encrypt->decode($cl['clave']); ?>" data-clipboard-text="<?php echo $this->encrypt->decode($cl['clave']); ?>" title="Click to copy me."><?php echo $this->encrypt->decode($cl['clave']); ?></button>
 								</td>
 								<td>
 									<a  class="btn btn-default" href="<?php echo base_url('claves/ver') . '/' . $cl['id_clave'] . $this->config->item('url_suffix');?>">

@@ -35,6 +35,9 @@ class Claves_model extends CI_Model
 	{
 		try {
 
+			unset($clave['cambio_de_clave']);
+
+
 			$this->db->trans_start();
 
 			$tags = $clave['tags'];
@@ -78,6 +81,48 @@ class Claves_model extends CI_Model
 		}
 
 	}
+
+
+	public function update($clave, $id_clave)
+	{
+		try {
+
+
+			if ($clave['cambio_de_clave'] == 0)
+			{
+				unset($clave['cambio_de_clave']);
+				unset($clave['clave']);
+			} else {
+				$clave['clave'] = $this->encrypt->encode($clave['clave']);
+				unset($clave['cambio_de_clave']);
+			}
+
+
+			// actualización de los tags
+			$this->db->delete('tags_claves', array('id_clave'=>$id_clave));
+			foreach($clave['tags'] AS $id_tag)
+			{
+				$this->db->insert('tags_claves', array('id_tag'=>$id_tag, 'id_clave'=>$id_clave));
+			}
+			unset($clave['tags']);
+			// fin actualización de los tags
+
+			$this->db->where('id_clave', $id_clave);
+			$this->db->update('claves', $clave);
+
+			if ($this->db->affected_rows()) {
+				return true;
+			} else {
+				return false;
+			}
+
+		} catch (Exception $e) {
+			echo $e->getMessage();
+			exit(1);
+		}
+	}
+
+
 
 
 	public function getAll()
@@ -306,6 +351,7 @@ class Claves_model extends CI_Model
 			$sql = "SELECT * FROM claves C WHERE C.id_clave=$id_clave";
 			$q = $this->db->query($sql);
 			$clave = $q->row_array();
+
 
 			return $clave;
 

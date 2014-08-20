@@ -208,8 +208,9 @@ class Claves extends MY_Controller {
 
 		if($this->input->server('REQUEST_METHOD') == 'POST')
 		{
-			$clave 			= $this->_getDataPost();
-			$validate_clave = $this->claves_model->validateCategoria($clave);
+			$clave 				= $this->_getDataPost();
+			$data['tags_claves']= $clave['tags']; // si agarra por post ya los cargo en tags_claves
+			$validate_clave 	= $this->claves_model->validate($clave);
 
 			if ( empty($validate_clave) )
 			{ 	// Validado OKA
@@ -227,13 +228,15 @@ class Claves extends MY_Controller {
 
 		} else { // GET
 			$clave = $this->_getDataGet($id_clave);
+			$data['tags_claves']	= $this->tags_model->getIdTagsByClave($id_clave);
 		}
 
-
-		$data['editar'] = false;
+		$data['categorias']	= $this->categorias_model->getCategorias();
+		$data['tags']		= $this->tags_model->getTags();
+		$data['emails'] 		= $this->emails_model->getEmails();
+		$data['clave'] 		= $clave;
 		$data['errores_validacion'] = $errores_validacion;
 
-		$data['clave'] 	= $clave;
 		$data['view_file'] 	= 'edit_clave';
 		$this->load->view('template',$data);
 	}
@@ -278,8 +281,9 @@ class Claves extends MY_Controller {
 		$clave['usuario']		= $this->input->post('usuario') ? $this->input->post('usuario') : '';
 		$clave['clave']			= $this->input->post('clave') ? $this->input->post('clave') : '';
 		$clave['descripcion']	= $this->input->post('descripcion') ? $this->input->post('descripcion') : '';
+		$clave['cambio_de_clave']= $this->input->post('cambio_de_clave') ? $this->input->post('cambio_de_clave') : 0;
 		// Tags
-		if ($this->input->post('tags'))
+		if ($this->input->post('tags') )
 		{
 			foreach ($_POST['tags'] AS $k => $ad) {
 				$clave['tags'][$k] = $ad;

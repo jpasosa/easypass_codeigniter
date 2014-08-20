@@ -22,7 +22,7 @@
 			<div class="form-group">
 				<label for="dni">Categoria</label>
 				<select name="id_categoria" class="form-control custom-input-lg">
-	    				<option value="0" <?php if ($clave['id_categoria'] == 0) 	echo 'selected="selected"'; ?>>En todas.</option>
+	    				<!-- <option value="0" <?php if ($clave['id_categoria'] == 0) 	echo 'selected="selected"'; ?>>En todas.</option> -->
 	    				<?php foreach ($categorias AS $cat): ?>
 	    					<?php if ($cat['id_categoria'] == $clave['id_categoria']): ?>
 	    						<option value="<?php echo $cat['id_categoria']; ?>" selected="selected">
@@ -46,11 +46,11 @@
 						<div>
 							<label for="nombre">Tags</label>
 							<br />
-							<select data-placeholder="Seleccione los tags. . ." name="tags[]" style="width:350px;" multiple="multiple" class="chosen-select">
-								<option value=""></option>
+							<select data-placeholder="Seleccione los tags. . ." name="tags[]" style="width:350px;" multiple="multiple" class="chosen-select" >
+								<!-- <option value=""></option> -->
 								<?php foreach ($tags AS $ad): ?>
 									<option value="<?php echo $ad['id_tag'] ?>"
-										<?php if (in_array($ad['id_tag'], $clave['tags'])): echo 'selected="selected"';endif; ?> >
+										<?php if (in_array($ad['id_tag'], $tags_claves)): echo 'selected="selected"';endif; ?> >
 										<?php echo $ad['nombre_tag']; ?>
 									</option>
 								<?php endforeach; ?>
@@ -87,29 +87,13 @@
 	    			</select>
 			</div>
 			<div class="form-group">
-				<label for="dni">Email Alternativo</label>
-				<select name="id_email_alt" class="form-control custom-input-lg">
-	    				<option value="0" <?php if ($clave['id_email_alt'] == 0) 	echo 'selected="selected"'; ?>>No se relaciona con ningún email.</option>
-	    				<?php foreach ($emails AS $email): ?>
-	    					<?php if ($email['id_email'] == $clave['id_email_alt']): ?>
-	    						<option value="<?php echo $email['id_email']; ?>" selected="selected">
-	    							<?php echo $email['nombre_email'];?>
-	    						</option>
-	    					<?php else: ?>
-	    						<option value="<?php echo $email['id_email']; ?>">
-	    							<?php echo $email['nombre_email'];?>
-	    						</option>
-	    					<?php endif; ?>
-	    				<?php endforeach; ?>
-	    			</select>
-			</div>
-			<div class="form-group">
 				<label for="nombre">Usuario</label>
 				<input type="text" class="form-control custom-input-lg" name="usuario" id="usuario" placeholder="Ingrese el usuario" value="<?php echo $clave['usuario']?>">
 			</div>
 			<div class="form-group">
 				<label for="nombre">Clave</label>
-				<input type="password" class="form-control custom-input-lg" name="clave" id="clave" placeholder="Ingrese el clave" value="<?php echo $clave['clave']?>">
+				<input type="password" title="doble click para modificar clave" class="form-control custom-input-lg" name="clave" id="clave"  value="<?php echo $this->encrypt->decode($clave['clave']);?>" readonly="readonly">
+				<input type="hidden" id="cambio_de_clave" name="cambio_de_clave" value="0" />
 			</div>
 			<div class="form-group">
 				<label for="nombre">Descripcion</label>
@@ -155,6 +139,14 @@
 		no_results_text: "No pudimos encontrar nada!",
 		search_contains: true,
 		width: "55%"
+	});
+
+	// Para modificar la clave.
+	$( "#clave" ).dblclick(function()
+	{
+		$("#clave").removeAttr('readonly');
+		$("#cambio_de_clave").val(1);
+
 	});
 </script>
 
