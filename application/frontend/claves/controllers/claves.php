@@ -273,15 +273,15 @@ class Claves extends MY_Controller {
 	{
 		$clave = array();
 
-		$clave['id_categoria']	= $this->input->post('id_categoria') ? $this->input->post('id_categoria') : 0;
-		$clave['titulo']			= $this->input->post('titulo') ? $this->input->post('titulo') : '';
-		$clave['url']				= $this->input->post('url') ? $this->input->post('url') : '';
-		$clave['puerto']			= $this->input->post('puerto') ? $this->input->post('puerto') : '';
-		$clave['id_email']		= $this->input->post('id_email') ? $this->input->post('id_email') : '';
-		$clave['usuario']		= $this->input->post('usuario') ? $this->input->post('usuario') : '';
-		$clave['clave']			= $this->input->post('clave') ? $this->input->post('clave') : '';
-		$clave['descripcion']	= $this->input->post('descripcion') ? $this->input->post('descripcion') : '';
-		$clave['cambio_de_clave']= $this->input->post('cambio_de_clave') ? $this->input->post('cambio_de_clave') : 0;
+		$clave['id_categoria']		= $this->input->post('id_categoria') ? $this->input->post('id_categoria') : 0;
+		$clave['titulo']				= $this->input->post('titulo') ? $this->input->post('titulo') : '';
+		$clave['url']					= $this->input->post('url') ? $this->input->post('url') : '';
+		$clave['puerto']				= $this->input->post('puerto') ? $this->input->post('puerto') : '';
+		$clave['id_email']			= $this->input->post('id_email') ? $this->input->post('id_email') : '';
+		$clave['usuario']			= $this->input->post('usuario') ? $this->input->post('usuario') : '';
+		$clave['clave']				= $this->input->post('clave') ? $this->input->post('clave') : '';
+		$clave['descripcion']		= $this->input->post('descripcion') ? $this->input->post('descripcion') : '';
+		$clave['cambio_de_clave']	= $this->input->post('cambio_de_clave') ? $this->input->post('cambio_de_clave') : 0;
 		// Tags
 		if ($this->input->post('tags') )
 		{

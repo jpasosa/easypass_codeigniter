@@ -144,130 +144,130 @@ class Claves_model extends CI_Model
 	}
 
 
-	public function search($searching = NULL)
-	{
-		try {
+	// public function search($searching = NULL)
+	// {
+	// 	try {
 
-			$words 		= $searching['words'];
-			$id_categoria 	= $searching['id_categoria'];
+	// 		$words 		= $searching['words'];
+	// 		$id_categoria 	= $searching['id_categoria'];
 
-			if ($id_categoria == 0) {
-				$search_categoria = " AND C.activo=1 ";
-			} else {
-				$search_categoria = " AND C.id_categoria=" . $id_categoria . " AND C.activo=1 ";
-			}
+	// 		if ($id_categoria == 0) {
+	// 			$search_categoria = " AND C.activo=1 ";
+	// 		} else {
+	// 			$search_categoria = " AND C.id_categoria=" . $id_categoria . " AND C.activo=1 ";
+	// 		}
 
-			$words_arr 		= explode(" ", $words);
-			$quanty_words 	= count($words_arr);
-			$cont 				= 1; // Inicializo contador.
+	// 		$words_arr 		= explode(" ", $words);
+	// 		$quanty_words 	= count($words_arr);
+	// 		$cont 				= 1; // Inicializo contador.
 
-			// do {
+	// 		// do {
 
-			// $cont++;
-			// } while ( $cont <= $quanty_words);
+	// 		// $cont++;
+	// 		// } while ( $cont <= $quanty_words);
 
-			$resultados_total_array = array();
+	// 		$resultados_total_array = array();
 
-			foreach ($words_arr AS $word)
-			{
-				$sql = 'SELECT * FROM claves C
-							INNER JOIN categorias CAT
-								ON C.id_categoria=CAT.id_categoria
-							INNER JOIN tags_claves TC
-								ON C.id_clave=TC.id_clave
-							INNER JOIN tags T
-								ON TC.id_tag=T.id_tag
-						WHERE T.nombre_tag LIKE "%' . $word . '%" ' . $search_categoria ;
+	// 		foreach ($words_arr AS $word)
+	// 		{
+	// 			$sql = 'SELECT * FROM claves C
+	// 						INNER JOIN categorias CAT
+	// 							ON C.id_categoria=CAT.id_categoria
+	// 						INNER JOIN tags_claves TC
+	// 							ON C.id_clave=TC.id_clave
+	// 						INNER JOIN tags T
+	// 							ON TC.id_tag=T.id_tag
+	// 					WHERE T.nombre_tag LIKE "%' . $word . '%" ' . $search_categoria ;
 
-				$result = $this->db->query($sql);
-				$result = $result->result_array();
+	// 			$result = $this->db->query($sql);
+	// 			$result = $result->result_array();
 
-				// Paso solo los id_clave
-				$array_id_claves_result = array();
-				foreach( $result AS $res)
-				{
-					if (isset($res['id_clave']))
-					{
-						$array_id_claves_result[] = $res['id_clave'];
-					}
-				}
-
-
-				//
-				// Debagueo un objeto / arreglo / variable
-				//
-				echo ' <br/> <div style="font-weight: bold; color: green;"> $array_id_claves_result: </div> <pre>' ;
-				echo '<div style="color: #3741c6;">';
-				if(is_array($array_id_claves_result)) {
-				    print_r($array_id_claves_result);
-				}else {
-				var_dump($array_id_claves_result);
-				}
-				echo '</div>';
-				echo '</pre>';
-				// die('--FIN--DEBUGEO----');
+	// 			// Paso solo los id_clave
+	// 			$array_id_claves_result = array();
+	// 			foreach( $result AS $res)
+	// 			{
+	// 				if (isset($res['id_clave']))
+	// 				{
+	// 					$array_id_claves_result[] = $res['id_clave'];
+	// 				}
+	// 			}
 
 
-				$resultados_total_array = $this->unsetIguales($array_id_claves_result, $resultados_total_array);
+	// 			//
+	// 			// Debagueo un objeto / arreglo / variable
+	// 			//
+	// 			echo ' <br/> <div style="font-weight: bold; color: green;"> $array_id_claves_result: </div> <pre>' ;
+	// 			echo '<div style="color: #3741c6;">';
+	// 			if(is_array($array_id_claves_result)) {
+	// 			    print_r($array_id_claves_result);
+	// 			}else {
+	// 			var_dump($array_id_claves_result);
+	// 			}
+	// 			echo '</div>';
+	// 			echo '</pre>';
+	// 			// die('--FIN--DEBUGEO----');
 
 
-				//
-				// Debagueo un objeto / arreglo / variable
-				//
-				echo ' <br/> <div style="font-weight: bold; color: green;"> $resultados_total_array: </div> <pre>' ;
-				echo '<div style="color: #3741c6;">';
-				if(is_array($resultados_total_array)) {
-				    print_r($resultados_total_array);
-				}else {
-				var_dump($resultados_total_array);
-				}
-				echo '</div>';
-				echo '</pre>';
-				// die('--FIN--DEBUGEO----');
+	// 			$resultados_total_array = $this->unsetIguales($array_id_claves_result, $resultados_total_array);
 
 
-			}
+	// 			//
+	// 			// Debagueo un objeto / arreglo / variable
+	// 			//
+	// 			echo ' <br/> <div style="font-weight: bold; color: green;"> $resultados_total_array: </div> <pre>' ;
+	// 			echo '<div style="color: #3741c6;">';
+	// 			if(is_array($resultados_total_array)) {
+	// 			    print_r($resultados_total_array);
+	// 			}else {
+	// 			var_dump($resultados_total_array);
+	// 			}
+	// 			echo '</div>';
+	// 			echo '</pre>';
+	// 			// die('--FIN--DEBUGEO----');
 
 
-			//
-			// Debagueo un objeto / arreglo / variable
-			//
-			echo ' <br/> <div style="font-weight: bold; color: green;"> $resultados_total_array: </div> <pre>' ;
-			echo '<div style="color: #3741c6;">';
-			if(is_array($resultados_total_array)) {
-			    print_r($resultados_total_array);
-			}else {
-			var_dump($resultados_total_array);
-			}
-			echo '</div>';
-			echo '</pre>';
-			die('--FIN--DEBUGEO----');
+	// 		}
 
 
-
-
-		} catch (Exception $e) {
-			echo $e->getMessage();
-			exit(1);
-
-		}
-	}
+	// 		//
+	// 		// Debagueo un objeto / arreglo / variable
+	// 		//
+	// 		echo ' <br/> <div style="font-weight: bold; color: green;"> $resultados_total_array: </div> <pre>' ;
+	// 		echo '<div style="color: #3741c6;">';
+	// 		if(is_array($resultados_total_array)) {
+	// 		    print_r($resultados_total_array);
+	// 		}else {
+	// 		var_dump($resultados_total_array);
+	// 		}
+	// 		echo '</div>';
+	// 		echo '</pre>';
+	// 		die('--FIN--DEBUGEO----');
 
 
 
 
-	private function unsetIguales($ides_result, $ides_totales)
-	{
-		foreach($ides_totales AS $k=>$id)
-		{
-			if (in_array($id, $ides_result))
-			{
-				unset($ides_totales[$k]);
-			}
-		}
+	// 	} catch (Exception $e) {
+	// 		echo $e->getMessage();
+	// 		exit(1);
 
-		return $ides_totales;
-	}
+	// 	}
+	// }
+
+
+
+
+	// private function unsetIguales($ides_result, $ides_totales)
+	// {
+	// 	foreach($ides_totales AS $k=>$id)
+	// 	{
+	// 		if (in_array($id, $ides_result))
+	// 		{
+	// 			unset($ides_totales[$k]);
+	// 		}
+	// 	}
+
+	// 	return $ides_totales;
+	// }
 
 
 
@@ -288,7 +288,7 @@ class Claves_model extends CI_Model
 				$search_categoria = "  ";
 			} else {
 				$todas_categorias = false;
-				$search_categoria = " (C.id_categoria=" . $id_categoria . ') ';
+				$search_categoria = " (C.id_categoria=" . $id_categoria . ') AND ';
 			}
 
 			$words = explode(" ", $words);
