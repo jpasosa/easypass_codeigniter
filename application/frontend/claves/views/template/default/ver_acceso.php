@@ -73,21 +73,13 @@
 	    				<?php endforeach; ?>
 	    			</select>
 			</div>
-
-
-
-
 			<div class="form-group">
 				<label for="nombre">Usuario</label>
-							<button class="copy-button" title="<?php echo $clave['usuario']; ?>" data-clipboard-text="<?php echo $this->encrypt->decode($clave['clave']); ?>" title="Click to copy me.">
-										<?php echo $clave['usuario']; ?>
-									</button>
+				<button class="copy-button" title="<?php echo $clave['usuario']; ?>" data-clipboard-text="<?php echo $this->encrypt->decode($clave['clave']); ?>" title="Click to copy me."><?php echo $clave['usuario']; ?></button>
 			</div>
 			<div class="form-group">
 				<label for="nombre">Clave</label>
-									<button class="copy-button" title="<?php echo $this->encrypt->decode($clave['clave']); ?>" data-clipboard-text="<?php echo $this->encrypt->decode($clave['clave']); ?>" title="Click to copy me.">
-										<?php echo $this->encrypt->decode($clave['clave']); ?>
-									</button>
+				<button class="copy-button" title="<?php echo $this->encrypt->decode($clave['clave']); ?>" data-clipboard-text="<?php echo $this->encrypt->decode($clave['clave']); ?>" title="Click to copy me."><?php echo $this->encrypt->decode($clave['clave']); ?></button>
 			</div>
 			<div class="form-group">
 				<label for="nombre">Descripcion</label>
